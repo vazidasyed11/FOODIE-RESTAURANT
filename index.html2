@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foodie Restaurant</title>
+
+    <style>
+
+        /* =========================
+           GLOBAL STYLES
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8f0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background-color: #222;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ff9800;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff9800;
+        }
+
+
+        /* =========================
+           HOME
+        ========================= */
+
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.6),
+                    rgba(0,0,0,0.6)
+                ),
+                url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4")
+                center/cover;
+
+            color: white;
+            padding-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff9800;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e68900;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #e65100;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+
+        /* =========================
+           CATEGORIES
+        ========================= */
+
+        .categories {
+            background-color: white;
+        }
+
+        .category-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category {
+            width: 200px;
+            padding: 25px;
+            text-align: center;
+            background-color: #fff3e0;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-8px);
+        }
+
+        .category h3 {
+            color: #e65100;
+        }
+
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu {
+            background-color: #fff8f0;
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .food-card {
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 20px;
+        }
+
+        .food-info h3 {
+            color: #e65100;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           SPECIAL OFFER
+        ========================= */
+
+        .offer {
+            background-color: #ff9800;
+            color: white;
+            text-align: center;
+        }
+
+        .offer h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .offer p {
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           REVIEWS
+        ========================= */
+
+        .reviews {
+            background-color: white;
+        }
+
+        .review-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .review {
+            width: 300px;
+            padding: 25px;
+            background-color: #fff3e0;
+            border-radius: 10px;
+        }
+
+        .review h3 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           RESERVATION FORM
+        ========================= */
+
+        .reservation {
+            background-color: #fff8f0;
+        }
+
+        .form {
+            max-width: 600px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form input,
+        .form select,
+        .form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e65100;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form button:hover {
+            background-color: #bf360c;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+
+        /* =========================
+           MOBILE DESIGN
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="container navbar">
+
+            <div class="logo">
+                Foodie
+            </div>
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="#home">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="#categories">Categories</a>
+                    </li>
+
+                    <li>
+                        <a href="#menu">Menu</a>
+                    </li>
+
+                    <li>
+                        <a href="#reviews">Reviews</a>
+                    </li>
+
+                    <li>
+                        <a href="#reservation">Reserve</a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HOME
+    ========================== -->
+
+    <section id="home">
+
+        <div class="container hero">
+
+            <h1>Welcome to Foodie</h1>
+
+            <p>
+                Delicious food made with fresh ingredients
+            </p>
+
+            <a href="#menu" class="btn">
+                Explore Menu
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
+
+    <section id="categories" class="categories">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Food Categories</h2>
+
+                <p>Choose your favorite category</p>
+
+            </div>
+
+
+            <div class="category-container">
+
+                <div class="category">
+                    <h3>🍕 Pizza</h3>
+                    <p>Freshly baked pizzas</p>
+                </div>
+
+                <div class="category">
+                    <h3>🍔 Burgers</h3>
+                    <p>Juicy and tasty burgers</p>
+                </div>
+
+                <div class="category">
+                    <h3>🍝 Pasta</h3>
+                    <p>Italian style pasta</p>
+                </div>
+
+                <div class="category">
+                    <h3>🍰 Desserts</h3>
+                    <p>Sweet treats</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MENU
+    ========================== -->
+
+    <section id="menu" class="menu">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Our Menu</h2>
+
+                <p>Popular dishes</p>
+
+            </div>
+
+
+            <div class="menu-container">
+
+
+                <div class="food-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+                        alt="Pizza"
+                    >
+
+                    <div class="food-info">
+
+                        <h3>Cheese Pizza</h3>
+
+                        <p>
+                            Fresh vegetables, cheese and
+                            delicious pizza sauce.
+                        </p>
+
+                        <div class="price">
+                            ₹249
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="food-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+                        alt="Burger"
+                    >
+
+                    <div class="food-info">
+
+                        <h3>Classic Burger</h3>
+
+                        <p>
+                            Crispy vegetables with a
+                            delicious burger patty.
+                        </p>
+
+                        <div class="price">
+                            ₹199
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="food-card">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601"
+                        alt="Pasta"
+                    >
+
+                    <div class="food-info">
+
+                        <h3>Creamy Pasta</h3>
+
+                        <p>
+                            Creamy pasta prepared with
+                            fresh ingredients.
+                        </p>
+
+                        <div class="price">
+                            ₹229
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         OFFER
+    ========================== -->
+
+    <section class="offer">
+
+        <div class="container">
+
+            <h2>Special Weekend Offer!</h2>
+
+            <p>
+                Get 20% OFF on orders above ₹500
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         REVIEWS
+    ========================== -->
+
+    <section id="reviews" class="reviews">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Customer Reviews</h2>
+
+                <p>What our customers say</p>
+
+            </div>
+
+
+            <div class="review-container">
+
+
+                <div class="review">
+
+                    <h3>Excellent Food</h3>
+
+                    <p>
+                        "The food was fresh and delicious.
+                        The service was excellent."
+                    </p>
+
+                </div>
+
+
+                <div class="review">
+
+                    <h3>Great Experience</h3>
+
+                    <p>
+                        "Beautiful atmosphere and
+                        tasty food. Loved it!"
+                    </p>
+
+                </div>
+
+
+                <div class="review">
+
+                    <h3>Highly Recommended</h3>
+
+                    <p>
+                        "The pizza was amazing and
+                        the prices were reasonable."
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESERVATION
+    ========================== -->
+
+    <section id="reservation" class="reservation">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Reserve a Table</h2>
+
+                <p>Book your table today</p>
+
+            </div>
+
+
+            <form class="form">
+
+                <label for="name">
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="date">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+
+                <label for="people">
+                    Number of People
+                </label>
+
+                <select id="people">
+
+                    <option>1 Person</option>
+                    <option>2 People</option>
+                    <option>3 People</option>
+                    <option>4 People</option>
+                    <option>5+ People</option>
+
+                </select>
+
+
+                <label for="message">
+                    Special Request
+                </label>
+
+                <textarea
+                    id="message"
+                    placeholder="Any special request?"
+                ></textarea>
+
+
+                <button type="submit">
+                    Book Table
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Foodie Restaurant
+        </p>
+
+        <p>
+            Fresh Food | Great Taste | Happy Customers
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
